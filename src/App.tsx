@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import styled, { ThemeProvider } from 'styled-components/macro'
+import { dark, light } from './theme'
+import ResetCSS from './ResetCSS'
+import Hello from './components/Hello'
+
+const Button = styled.div`
+  border: ${({ theme }) => `1px solid ${theme.colors.cardBorder}`};
+  color: ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.background};
+  width: fit-content;
+  padding: 8px 32px;
+  cursor: pointer;
+`
 
 function App() {
+  const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark')
+
+  const toggleThemeMode = useCallback(() => {
+    setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={themeMode === 'dark' ? dark : light}>
+      <ResetCSS />
+      <Hello />
+
+      <Button onClick={() => toggleThemeMode()}>切换主题</Button>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
