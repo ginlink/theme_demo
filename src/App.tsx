@@ -1,10 +1,13 @@
 import React, { useCallback, useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import styled, { ThemeProvider } from 'styled-components/macro'
 import { dark, light } from './theme'
 import ResetCSS from './ResetCSS'
 import Hello from './components/Hello'
+
+const Wrapper = styled.div`
+  min-height: 200vh;
+`
 
 const Button = styled.div`
   border: ${({ theme }) => `1px solid ${theme.colors.cardBorder}`};
@@ -25,9 +28,12 @@ function App() {
   return (
     <ThemeProvider theme={themeMode === 'dark' ? dark : light}>
       <ResetCSS />
-      <Hello />
 
-      <Button onClick={() => toggleThemeMode()}>切换主题</Button>
+      <Wrapper>
+        <Hello />
+
+        <Button onClick={() => toggleThemeMode()}>Change theme</Button>
+      </Wrapper>
     </ThemeProvider>
   )
 }
