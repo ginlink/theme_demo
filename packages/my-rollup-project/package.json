@@ -1,0 +1,13 @@
+{
+  "name": "@ginlink/my-rollup-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c -o bundle.js"
+  },
+  "devDependencies": {
+    "rollup-plugin-json": "^4.0.0"
+  }
+}
